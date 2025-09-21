@@ -1,0 +1,38 @@
+# since docker compose v2, version is now infered by usage.
+
+services:
+  ################# BACKEND ########################
+  backend:
+    image: backend
+    container_name: backend
+    restart: always
+    build:
+      context: . # gives a path to the Dockerfile for potential commands that interact with our project foler : - COPY,  -ADD, ....
+      dockerfile: docker/backend/Dockerfile
+    ports:
+      - 8080:80 #left part 8080 = the port on the host side ~~~~~~ #right part 80 : the default Apache port in a container
+    env_file:
+      - .env
+    volumes:
+      - ./src:/var/www/html #left part ./src = the folder on my machine that will be transmitted to the container. ~~~~~ #right part /var/www/html = the default folder for Apache to look for web files.
+    depends_on:
+      - database
+  ################# DATABASE #######################
+
+  database:
+    image: mariadb:11
+    container_name: database
+    restart: always
+    environment: # fetch from .env inside the current folder, will not be sent to the container.
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      GMAIL_PASS: ${GMAIL_PASS}
+      GMAIL_USER: ${GMAIL_USER}
+    volumes:
+      - camagru_data:/var/lib/mysql #left part camagru_data will be created by docker to store data on my computer and persist data if the container is removed ~~~~ #right part : /var/lib/mysql = default output folder of mariadb => the container will write to this folder, but it's actually an alias of my local camagru_data folder
+      - ./sql:/docker-entrypoint-initdb.d # script to run on DB start -- Left = host real path ~~~ right = maria db default path.
+
+volumes:
+  camagru_data:
