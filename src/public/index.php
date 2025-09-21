@@ -17,6 +17,9 @@ if (strpos($path, '/api/') === 0) {
         case '/api/signup':
             require __DIR__ . '/../api/auth/signup.php';
             break;
+        case '/api/verification':
+            require __DIR__ . '/../api/auth/verification.php';
+            break;
         default:
             http_response_code(404);
             echo json_encode(["error" => "Not found"]);

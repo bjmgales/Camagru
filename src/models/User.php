@@ -3,6 +3,7 @@
 require_once __DIR__ . "/../db.php";
 require_once __DIR__ . "/../utils/sql_queries.php";
 require_once __DIR__ . '/../utils/mail.php';
+require_once __DIR__ . '/../config/config.php';
 
 class User
 {
@@ -20,8 +21,12 @@ class User
     public function save()
     {
         try {
-            sql_insert("users", ['username' => $this->_username, 'email' => $this->_email, 'password_hash' => password_hash($this->_password, PASSWORD_BCRYPT)]);
-            send_verification_email($this->_username, $this->_email);
+            sql_insert(USER_TABLE, [USERNAME => $this->_username, EMAIL => $this->_email, PASSWORD_HASH => password_hash($this->_password, PASSWORD_BCRYPT)]);
+
+            $token_hash = send_verification_email($this->_username, $this->_email);
+            $now = date('Y-m-d H:i:s', time());
+            $expires_at = date('Y-m-d H:i:s', time() + 30 * 60);
+            sql_update(USER_TABLE, [TOKEN_HASH => $token_hash, TOKEN_CREATION_TIME => $now, TOKEN_EXPIRES_AT => $expires_at], EMAIL, $this->_email);
         } catch (Error $err) {
             throw new Error($err);
         }
@@ -29,7 +34,7 @@ class User
 
     public function exists()
     {
-        return sql_exists("users", ['username' => $this->_username, 'email' => $this->_email]);
+        return sql_exists(USER_TABLE, [USERNAME => $this->_username, EMAIL => $this->_email]);
     }
 
     public function get_mail()

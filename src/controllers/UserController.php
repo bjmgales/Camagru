@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../models/User.php';
+require_once __DIR__ . '/../config/config.php';
 
 class UserController
 {
@@ -15,9 +16,9 @@ class UserController
     public function register()
     {
         $valid = $this->_validate_fields();
-        if (!$valid['ok']) {
+        if (!$valid[SUCCESS]) {
             $user = null;
-            return error_response(422, $valid['error']);
+            return error_response(422, $valid[ERROR]);
         }
         $this->_user->save();
         return success_response($this->_user);
@@ -32,27 +33,27 @@ class UserController
         $usernameRegexp = '/^[A-Za-z0-9](?:[A-Za-z0-9_]{1,20}[A-Za-z0-9])$/';
 
         if (!filter_var($this->_user->get_mail(), FILTER_VALIDATE_EMAIL)) {
-            return ["ok" => false, "error" => ""];
+            return [SUCCESS => false, ERROR => EMAIL_INVALID];
         } else if (!preg_match($usernameRegexp, $this->_user->get_username())) {
             return [
-                "ok" => false,
-                "error" =>
-                "EMAIL_INVALID"
+                SUCCESS => false,
+                ERROR =>
+                USERNAME_INVALID
             ];
         } else if (!preg_match($passwordRegexp, $this->_user->get_password())) {
             return [
-                "ok" => false,
-                "error" =>
-                "PASSWORD_INVALID"
+                SUCCESS => false,
+                ERROR =>
+                PASSWORD_INVALID
             ];
         } else if ($this->_user->exists()) {
             return [
-                "ok" => false,
-                "error" =>
-                "USER_ALREADY_EXIST"
+                SUCCESS => false,
+                ERROR =>
+                DUPLICATE_USER
             ];
         }
 
-        return ["ok" => true];
+        return [SUCCESS => true];
     }
 }

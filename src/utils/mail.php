@@ -4,7 +4,7 @@ function send_verification_email(string $user, string $toEmail)
 {
     $subject = "Welcome to camagru {$user}!";
     $rawToken = bin2hex(random_bytes(25));
-    $verifyUrl = "http://localhost:8080/api/auth/{$rawToken}";
+    $verifyUrl = "http://localhost:8080/api/verification?token={$rawToken}";
 
     $message = <<<EOT
 Hello $user,
@@ -29,5 +29,5 @@ EOT;
     }
 
     mail($toEmail, $subject, $message, $headersStr);
-    echo "ok mail";
+    return hash('sha256', $rawToken);
 }

@@ -1,11 +1,14 @@
 ---------------------- USERS -----------------------
 CREATE TABLE IF NOT EXISTS users (
-    id              INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    username        VARCHAR(22) NOT NULL UNIQUE,
-    email           VARCHAR(100) NOT NULL UNIQUE,
-    password_hash   VARCHAR(255) NOT NULL,
-    created_at      TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    is_verified     TINYINT(1) NOT NULL DEFAULT 0
+    id                      INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    username                VARCHAR(22) NOT NULL UNIQUE,
+    email                   VARCHAR(100) NOT NULL UNIQUE,
+    password_hash           VARCHAR(255) NOT NULL,
+    created_at              TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    token_hash              VARCHAR(255),
+    token_creation_time     TIMESTAMP,
+    token_expires_at        TIMESTAMP,
+    is_verified             TINYINT(1) NOT NULL DEFAULT 0
 ) CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 ---------------------- IMAGES -----------------------
