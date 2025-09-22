@@ -6,7 +6,6 @@ function error_response($code, $message)
     $result = json_encode(['error' => $message]);
 
     echo $result;
-    exit;
 }
 
 function success_response($payload)
@@ -14,5 +13,4 @@ function success_response($payload)
     http_response_code(200);
     $result = json_encode($payload);
     echo $result;
-    exit;
 }

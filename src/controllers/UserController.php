@@ -21,7 +21,7 @@ class UserController
             return error_response(422, $valid[ERROR]);
         }
         $this->_user->save();
-        return success_response($this->_user);
+        success_response([SUCCESS => true, MESSAGE => TOKEN_SENT]);
     }
 
     ####################### PRIVATE #########################

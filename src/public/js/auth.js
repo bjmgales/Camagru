@@ -1,71 +1,69 @@
 import { messages } from './const/message.js';
-import { regExpStore } from './const/regexpStore.js';
-import { apiRequest } from './utils/api.js';
+import { apiRequest } from './fetchService/api.js';
+import { fillInnerHtml } from './utils.js';
 
-const login = () => {
-  const { email, password, error } = loginCredentials;
-  if (!regExpStore.mail.test(email.value) || !regExpStore.password.test(password.value)) {
-    error.innerHTML = messages.AUTH_ERROR + ' ' + messages.TRY_AGAIN;
-    return;
-  } else {
-    error.innerHTML = '';
-  }
+const params = new URLSearchParams(window.location.search);
+
+if (params.has('verification-success')) {
+  document.querySelector('.signupDiv').display = 'none';
+  document.querySelector('#welcome-title').textContent = messages['VERIFICATION_SUCCESS'];
+} else if (params.has('verification-failure')) {
+  document.querySelector('#welcome-title').textContent = messages['VERIFICATION_FAILURE'];
+}
+
+const login = async () => {
+  // const { email, password, messageSpan } = loginCredentials;
+  // try{
+  //   const response = await apiRequest('login')
+  // }
+  // catch {
+  //   fillInnerHtml(messageSpan, messages['EXPIRED_TOKEN'], 'red');
+  // }
 };
 
 const signUp = async () => {
-  const { email, password, errorSpan, username, confirmPassword } = signupCredentials;
-
-  if (!regExpStore.mail.test(email.value)) {
-    errorSpan.innerHTML = messages.EMAIL_INVALID;
+  const { email, password, messageSpan, username, confirmPassword } = signupCredentials;
+  if (password?.value != confirmPassword?.value) {
+    fillInnerHtml(messageSpan, messages['PASSWORD_MISMATCH'], 'red');
     return;
-  } else if (!regExpStore.username.test(username.value)) {
-    errorSpan.innerHTML = messages.USERNAME_INVALID;
-    return;
-  } else if (!regExpStore.password.test(password.value)) {
-    errorSpan.innerHTML = messages.PASSWORD_INVALID;
-    return;
-  } else if (password.value != confirmPassword.value) {
-    errorSpan.innerHTML = messages.PASSWORD_MISMATCH;
-    return;
-  } else {
-    errorSpan.innerHTML = '';
   }
+
   try {
-    const userData = await apiRequest('signup', {
+    console.log('before');
+    const data = await apiRequest('signup', {
       method: 'POST',
       body: JSON.stringify({ email: email.value, username: username.value, password: password.value }),
     });
+    fillInnerHtml(messageSpan, messages[data['message']], 'green');
   } catch (err) {
-    console.log(messages[err.details['error']]);
-    if (messages[err.details['error']]) errorSpan.innerHTML = messages[err.details['error']];
+    if (messages[err.details?.['error']]) {
+      fillInnerHtml(messageSpan, messages[err.details['error']], 'red');
+    }
     return;
   }
-
-  console.log(userData);
 };
 
 const loginCredentials = {
   email: document.querySelector('#loginForm .mail'),
   password: document.querySelector('#loginForm .password'),
   submit: document.querySelector('#loginForm'),
-  errorSpan: document.querySelector('#loginForm .error'),
+  messageSpan: document.querySelector('#loginForm .message'),
 };
-
 const signupCredentials = {
   email: document.querySelector('#signupForm .mail'),
   username: document.querySelector('#signupForm .username'),
   password: document.querySelector('#signupForm .password'),
   confirmPassword: document.querySelector('#signupForm .confirmPassword'),
   submit: document.querySelector('#signupForm'),
-  errorSpan: document.querySelector('#signupForm .error'),
+  messageSpan: document.querySelector('#signupForm .message'),
 };
 
-loginCredentials.submit.addEventListener('submit', (e) => {
+loginCredentials.submit?.addEventListener('submit', (e) => {
   e.preventDefault();
   login();
 });
 
-signupCredentials.submit.addEventListener('submit', (e) => {
+signupCredentials.submit?.addEventListener('submit', (e) => {
   e.preventDefault();
   signUp();
 });

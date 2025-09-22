@@ -2,16 +2,16 @@
 
 require_once __DIR__ . "/../db.php";
 require_once __DIR__ . "/../utils/sql_queries.php";
-require_once __DIR__ . '/../utils/mail.php';
+require_once __DIR__ . '/../mailing/mail.php';
 require_once __DIR__ . '/../config/config.php';
 
 class User
 {
-    private string $_username;
+    private ?string $_username;
     private string $_email;
     private string $_password;
 
-    public function __construct(string $username, string $email, string $password)
+    public function __construct(string $email, string $password, ?string $username = null,)
     {
         $this->_username = $username;
         $this->_email    = $email;
@@ -32,6 +32,15 @@ class User
         }
     }
 
+    public function retrieve()
+    {
+        try {
+            $result = sql_select(USER_TABLE, [EMAIL => $this->_email, PASSWORD_HASH => password_hash($this->_password, PASSWORD_BCRYPT)]);
+            return $result;
+        } catch (Error $e) {
+            return $e;
+        }
+    }
     public function exists()
     {
         return sql_exists(USER_TABLE, [USERNAME => $this->_username, EMAIL => $this->_email]);

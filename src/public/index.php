@@ -7,22 +7,22 @@ if (strpos($path, '/api/') === 0) {
     switch ($path) {
         case '/api/login':
             require __DIR__ . '/../api/auth/login.php';
-            break;
+            exit;
         case '/api/logout':
             require __DIR__ . '/../api/auth/logout.php';
-            break;
+            exit;
         case '/api/me':
             require __DIR__ . '/../api/auth/me.php';
-            break;
+            exit;
         case '/api/signup':
             require __DIR__ . '/../api/auth/signup.php';
-            break;
+            exit;
         case '/api/verification':
             require __DIR__ . '/../api/auth/verification.php';
-            break;
+            exit;
         default:
-            http_response_code(404);
-            echo json_encode(["error" => "Not found"]);
+            error_response(404, "Not found");
+            exit;
     }
     exit;
 }

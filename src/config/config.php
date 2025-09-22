@@ -28,14 +28,26 @@
 
 ############# RESPONSE KEYS ##############
 
-const SUCCESS = 'success';
-const ERROR = 'error';
-const EMAIL_INVALID =  "EMAIL_INVALID";
-const USERNAME_INVALID =  "USERNAME_INVALID";
-const PASSWORD_INVALID = "PASSWORD_INVALID";
-const DUPLICATE_USER = "USER_ALREADY_EXIST";
-const EXPIRED_TOKEN = "EXPIRED_TOKEN";
-const USER_VERIFIED = "USER_VERIFIED";
+    ## BASIC
+    const SUCCESS = 'success';
+
+    const ERROR = 'error';
+    const MESSAGE = 'message';
+
+    ## SIGN UP
+    const EMAIL_INVALID =  "EMAIL_INVALID";
+    const USERNAME_INVALID =  "USERNAME_INVALID";
+    const PASSWORD_INVALID = "PASSWORD_INVALID";
+    const DUPLICATE_USER = "USER_ALREADY_EXIST";
+    const TOKEN_SENT = "TOKEN_SENT";
+
+    ## LOGIN
+    const LOGIN_FAILURE = "LOGIN_FAILURE";
+
+    ## USER VERIFICATION
+    const EXPIRED_TOKEN = "EXPIRED_TOKEN";
+
+
 
 ################ ENV #####################
 

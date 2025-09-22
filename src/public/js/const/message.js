@@ -9,4 +9,11 @@ export const messages = {
     'Password must be 8–72 characters long, and include at least one uppercase letter, one lowercase letter, one number, and one special character. Spaces are not allowed.',
   PASSWORD_MISMATCH: 'Passwords do not correspond.',
   TRY_AGAIN: 'Please try again.',
+  SUCCESS: 'Operation completed successfully.',
+  ERROR: 'An error occurred. Please try again.',
+  LOGIN_FAILURE: 'Login failed. Please check your credentials.',
+  TOKEN_SENT:'Thanks for signing-up ! Please click the validation link sent to',
+  EXPIRED_TOKEN: 'Your verification link has expired. Please request a new one.',
+  VERIFICATION_SUCCESS: '✅ Your account has been verified! Please login.',
+  VERIFICATION_FAILURE: '❌ Verification failed or expired. Please Relog.',
 };

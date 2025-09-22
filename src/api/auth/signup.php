@@ -20,8 +20,9 @@ if (!$username || !$password || !$email) {
     error_response(420, "Missing ressources to create user.");
 }
 
-$user = new User($username, $email, $password);
+$user = new User($email, $password, $username);
 $userController = new UserController($user);
 
 $response = $userController->register();
 echo $response;
+exit;

@@ -6,10 +6,14 @@ require_once __DIR__ . '/../../utils/utils.php';
 
 function verify_user(string $token)
 {
-    if (!sql_exists(USER_TABLE, [TOKEN_HASH])) {
-        error_response(404, EXPIRED_TOKEN); #TODO make exit more readable, rn in error_response thats shit
-    }
     $tokenHash = hash('sha256', $token);
+    if (!sql_exists(USER_TABLE, [TOKEN_HASH=>$tokenHash], "OR", "AND token_expires_at > NOW()")) {
+        if (sql_exists(USER_TABLE, [TOKEN_HASH=>$tokenHash])){
+            sql_delete(USER_TABLE, [TOKEN_HASH=>$tokenHash]);
+        }
+        header("Location: /login?verification-failure");
+        exit;
+    }
     sql_update(USER_TABLE, [TOKEN_HASH => null, TOKEN_CREATION_TIME => null, TOKEN_EXPIRES_AT => null, IS_VERIFIED => 1], TOKEN_HASH, $tokenHash);
     header("Location: /login?verification-success");
     exit;

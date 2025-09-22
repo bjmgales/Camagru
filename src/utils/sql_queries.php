@@ -33,7 +33,7 @@ function sql_update(string $table, array $data, string $key, string $value)
     $query->execute(array_merge(array_values($data), [$value]));
 }
 
-function sql_exists(string $table, array $data, ?string $condition = "OR")
+function sql_exists(string $table, array $data, ?string $condition = "OR", ?string $extend = '')
 {
     $pdo = getPDO();
 
@@ -45,6 +45,7 @@ function sql_exists(string $table, array $data, ?string $condition = "OR")
 
     $sql = "SELECT 1 FROM `$table`
             WHERE " . implode(" " . $condition . " ", $conditions) .
+        " " . $extend . " " .
         " LIMIT 1";
 
     $query = $pdo->prepare($sql);
@@ -67,4 +68,20 @@ function sql_select(string $table, array $conditions, ?string $toSelect = '*')
     $query->execute(array_values($conditions));
 
     return $query->fetchAll(PDO::FETCH_ASSOC);
+}
+
+function sql_delete(string $table, array $data, ?string $condition = "OR")
+{
+    $pdo = getPDO();
+
+    $columns = array_keys($data);
+    $conditions = [];
+    foreach ($columns as $col) {
+        $conditions[] = "$col = ?";
+    }
+
+    $sql = "DELETE FROM `$table`
+            WHERE " . implode(" " . $condition . " ", $conditions);
+    $query = $pdo->prepare($sql);
+    $query->execute(array_values($data));
 }

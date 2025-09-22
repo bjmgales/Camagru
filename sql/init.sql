@@ -60,6 +60,13 @@ CREATE TABLE IF NOT EXISTS likes (
 -- CHARSET==Emoji support, COLLATE==Case insenstivie (user = USer)
 
 
+---------------------- JOBS -----------------------
+
+CREATE EVENT cleanup_tokens
+ON SCHEDULE EVERY 0.5 HOUR
+DO
+    DELETE FROM USERS WHERE token_expires_at < NOW()
+---------------------- TEMPLATES -----------------------
 
 INSERT INTO overlays (file_path, is_default) VALUES
 ('upload/overlays/defaults/elie.png', 1),

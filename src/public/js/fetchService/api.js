@@ -11,5 +11,5 @@ export async function apiRequest(endpoint, options = {}) {
     err.details = data;
     throw err;
   }
-  return response;
+  return data;
 }

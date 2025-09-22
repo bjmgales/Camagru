@@ -23,6 +23,7 @@ services:
     image: mariadb:11
     container_name: database
     restart: always
+    command: --event-scheduler=ON
     environment: # fetch from .env inside the current folder, will not be sent to the container.
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
