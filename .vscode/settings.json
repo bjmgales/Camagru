@@ -3,4 +3,6 @@
   "typescript.suggest.autoImports": true,
   "javascript.preferences.importModuleSpecifierEnding": "js",
   "typescript.preferences.importModuleSpecifierEnding": "js",
+  "intelephense.completion.insertUseDeclaration": true,
+  "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": true
 }

@@ -24,6 +24,22 @@ class UserController
         success_response([SUCCESS => true, MESSAGE => TOKEN_SENT]);
     }
 
+    public function retrieve()
+    {
+        try {
+
+            $user_data = $this->_user->retrieve();
+            if (!$user_data) {
+                throw new Error();
+            } else if (!password_verify($this->_user->get_password(), $user_data[0][PASSWORD_HASH])) {
+                error_response(500, WRONG_PASSWORD);
+                exit();
+            }
+            echo (json_encode($user_data[0]));
+        } catch (Error) {
+            error_response(404, LOGIN_FAILURE);
+        }
+    }
     ####################### PRIVATE #########################
 
 

@@ -12,17 +12,21 @@ if (params.has('verification-success')) {
 }
 
 const login = async () => {
-  // const { email, password, messageSpan } = loginCredentials;
-  // try{
-  //   const response = await apiRequest('login')
-  // }
-  // catch {
-  //   fillInnerHtml(messageSpan, messages['EXPIRED_TOKEN'], 'red');
-  // }
+  const { email, password, messageSpan } = loginCredentials;
+  try {
+    const data = await apiRequest('login', {
+      method: 'POST',
+      body: JSON.stringify({ email: email.value, password: password.value }),
+    });
+  } catch (err) {
+    if (messages[err.details?.['error']]) {
+      fillInnerHtml(messageSpan, messages[err.details['error']], 'red');
+    }
+  }
 };
 
 const signUp = async () => {
-  const { email, password, messageSpan, username, confirmPassword } = signupCredentials;
+const { email, password, messageSpan, username, confirmPassword } = signupCredentials;
   if (password?.value != confirmPassword?.value) {
     fillInnerHtml(messageSpan, messages['PASSWORD_MISMATCH'], 'red');
     return;

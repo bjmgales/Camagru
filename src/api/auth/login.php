@@ -12,9 +12,9 @@ $data = json_decode($input, true);
 if (!$data) {
     error_response(400, "Invalid JSON.");
 }
-
 $email = $data['email'] ?? null;
 $password = $data['password'] ?? null;
+error_log(print_r($data));
 
 if (!$password || !$email) {
     error_response(420, "Missing ressources to create user.");

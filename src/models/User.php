@@ -35,7 +35,7 @@ class User
     public function retrieve()
     {
         try {
-            $result = sql_select(USER_TABLE, [EMAIL => $this->_email, PASSWORD_HASH => password_hash($this->_password, PASSWORD_BCRYPT)]);
+            $result = sql_select(USER_TABLE, [EMAIL => $this->_email]);
             return $result;
         } catch (Error $e) {
             return $e;
