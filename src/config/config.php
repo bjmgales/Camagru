@@ -33,6 +33,7 @@
 
     const ERROR = 'error';
     const MESSAGE = 'message';
+    const AUTHENTICATED = "authenticated";
 
     ## SIGN UP
     const EMAIL_INVALID =  "EMAIL_INVALID";

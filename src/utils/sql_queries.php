@@ -1,7 +1,6 @@
 <?php
 
-require_once __DIR__ . "/../db.php";
-require_once __DIR__ . "/utils.php";
+require_once __DIR__ . '/../bootstrap.php';
 
 function sql_insert(string $table, array $data)
 {

@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../models/User.php';
-require_once __DIR__ . '/../config/config.php';
+require_once __DIR__ . '/../bootstrap.php';
 
 class UserController
 {
@@ -27,7 +27,6 @@ class UserController
     public function retrieve()
     {
         try {
-
             $user_data = $this->_user->retrieve();
             if (!$user_data) {
                 throw new Error();
@@ -38,7 +37,6 @@ class UserController
             $_SESSION[EMAIL] = $user_data[0][EMAIL];
             $_SESSION[USERNAME] = $user_data[0][USERNAME];
             success_response([SUCCESS => true]);
-            exit;
             exit;
         } catch (Error) {
             error_response(404, LOGIN_FAILURE);

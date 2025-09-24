@@ -1,8 +1,7 @@
 <?php
 
-require_once __DIR__ . '/../../utils/sql_queries.php';
-require_once __DIR__ . '/../../config/config.php';
-require_once __DIR__ . '/../../utils/utils.php';
+require_once __DIR__ . "/../../bootstrap.php";
+
 
 function verify_user(string $token)
 {

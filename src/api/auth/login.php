@@ -1,7 +1,7 @@
 <?php
 
 
-require_once __DIR__ . "/../../utils/utils.php";
+require_once __DIR__ . "/../../bootstrap.php";
 require_once __DIR__ . "/../../controllers/UserController.php";
 
 header("Content-Type: application/json");
