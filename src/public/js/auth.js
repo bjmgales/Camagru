@@ -1,3 +1,4 @@
+import { NOT_CONNECTED, SUCCESS } from './const/const.js';
 import { messages } from './const/message.js';
 import { apiRequest } from './fetchService/api.js';
 import { fillInnerHtml } from './utils.js';
@@ -18,6 +19,7 @@ const login = async () => {
       method: 'POST',
       body: JSON.stringify({ email: email.value, password: password.value }),
     });
+    if (data[SUCCESS]) window.location.href = '/home';
   } catch (err) {
     if (messages[err.details?.['error']]) {
       fillInnerHtml(messageSpan, messages[err.details['error']], 'red');
@@ -26,7 +28,7 @@ const login = async () => {
 };
 
 const signUp = async () => {
-const { email, password, messageSpan, username, confirmPassword } = signupCredentials;
+  const { email, password, messageSpan, username, confirmPassword } = signupCredentials;
   if (password?.value != confirmPassword?.value) {
     fillInnerHtml(messageSpan, messages['PASSWORD_MISMATCH'], 'red');
     return;
@@ -71,3 +73,11 @@ signupCredentials.submit?.addEventListener('submit', (e) => {
   e.preventDefault();
   signUp();
 });
+
+const query = Object.fromEntries(params.entries());
+if (query && query[NOT_CONNECTED] == true) {
+  document.querySelector('#welcome-title').innerHTML =
+    "We know you're eager to visit this dope website, but please signup first petit malin!";
+}
+
+console.log('gigaProut');

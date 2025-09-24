@@ -14,7 +14,6 @@ if (!$data) {
 }
 $email = $data['email'] ?? null;
 $password = $data['password'] ?? null;
-error_log(print_r($data));
 
 if (!$password || !$email) {
     error_response(420, "Missing ressources to create user.");
@@ -22,7 +21,6 @@ if (!$password || !$email) {
 
 $user = new User($email, $password);
 
-$userController = new UserController($user);
+$user_controller = new UserController($user);
 
-echo $userController->retrieve();
-exit;
+$user_info = $user_controller->retrieve();

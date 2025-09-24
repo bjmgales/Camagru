@@ -1,13 +1,18 @@
 <?php
+require_once __DIR__ . "/../../config/config.php";
+require_once __DIR__ . "/../../utils/utils.php";
 
 session_start();
 header('Content-type: application/json');
 
-if (isset($_SESSION['user_id'])) {
-    echo json_encode([
+if (isset($_SESSION[USERNAME])) {
+    success_response([
         'authenticated' => true,
-        'user_id' => $_SESSION['user_id']
+        'email' => $_SESSION[EMAIL],
+        'user_id' => $_SESSION[USERNAME]
     ]);
+    error_log('success');
 } else {
-    echo json_encode(['authenticated' => false]);
+    error_response(500, [ERROR => false]);
+    error_log('failure');
 };

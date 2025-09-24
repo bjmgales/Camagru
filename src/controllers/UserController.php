@@ -35,9 +35,14 @@ class UserController
                 error_response(500, WRONG_PASSWORD);
                 exit();
             }
-            echo (json_encode($user_data[0]));
+            $_SESSION[EMAIL] = $user_data[0][EMAIL];
+            $_SESSION[USERNAME] = $user_data[0][USERNAME];
+            success_response([SUCCESS => true]);
+            exit;
+            exit;
         } catch (Error) {
             error_response(404, LOGIN_FAILURE);
+            exit;
         }
     }
     ####################### PRIVATE #########################

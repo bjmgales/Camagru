@@ -42,6 +42,7 @@
     const TOKEN_SENT = "TOKEN_SENT";
 
     ## LOGIN
+    const LOGIN_SUCCESS = "LOGIN_SUCCESS";
     const LOGIN_FAILURE = "LOGIN_FAILURE";
     const WRONG_PASSWORD = "WRONG_PASSWORD";
 

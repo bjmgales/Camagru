@@ -12,8 +12,9 @@ export const messages = {
   SUCCESS: 'Operation completed successfully.',
   ERROR: 'An error occurred. Please try again.',
   LOGIN_FAILURE: 'Login failed. Please check your credentials.',
-  TOKEN_SENT:'Thanks for signing-up ! Please click the validation link sent to',
+  TOKEN_SENT: 'Thanks for signing-up ! Please click the validation link sent to',
   EXPIRED_TOKEN: 'Your verification link has expired. Please request a new one.',
   VERIFICATION_SUCCESS: '✅ Your account has been verified! Please login.',
   VERIFICATION_FAILURE: '❌ Verification failed or expired. Please Relog.',
 };
+
