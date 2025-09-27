@@ -27,15 +27,15 @@ class UserController
     public function retrieve()
     {
         try {
-            $user_data = $this->_user->retrieve();
+            $user_data = $this->_user->retrieve_from_db();
             if (!$user_data) {
                 throw new Error();
             } else if (!password_verify($this->_user->get_password(), $user_data[0][PASSWORD_HASH])) {
                 error_response(500, WRONG_PASSWORD);
                 exit();
             }
-            $_SESSION[EMAIL] = $user_data[0][EMAIL];
-            $_SESSION[USERNAME] = $user_data[0][USERNAME];
+            $_SESSION[EMAIL] = sanitize_user_inputs($user_data[0][EMAIL]);
+            $_SESSION[USERNAME] = sanitize_user_inputs($user_data[0][USERNAME]);
             success_response([SUCCESS => true]);
             exit;
         } catch (Error) {

@@ -30,13 +30,17 @@ class User
         }
     }
 
-    public function retrieve()
+    public function retrieve_from_db()
     {
         try {
             $result = sql_select(USER_TABLE, [EMAIL => $this->_email]);
             return $result;
         } catch (Error $e) {
-            return $e;
+            try {
+                $result = sql_select(USER_TABLE, [USERNAME => $this->_username]);
+            } catch (Error $e) {
+                return $e;
+            }
         }
     }
     public function exists()

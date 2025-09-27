@@ -1,5 +1,4 @@
 <?php
-
 function send_verification_email(string $user, string $toEmail)
 {
     $subject = "Welcome to camagru {$user}!";

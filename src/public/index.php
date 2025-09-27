@@ -26,5 +26,3 @@ if (strpos($path, '/api/') === 0) {
     }
     exit;
 }
-
-// For non-API routes, just stop here → Apache serves the static file

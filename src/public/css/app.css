@@ -1,9 +1,84 @@
+@import 'tailwindcss';
+
 label {
   display: flex;
   flex-direction: column;
-  gap:4px;
+  gap: 4px;
 }
 
 form {
   display: contents;
+}
+
+body {
+  background: repeating-linear-gradient(to bottom right, #9333ea, #3b82f6); /* purple→blue */
+  background-attachment: fixed;
+}
+
+p,
+span,
+div,
+h1,
+h2,
+h3,
+h4 {
+  color: white;
+}
+
+.gradient-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.125rem; /* p-0.5 */
+  overflow: hidden;
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  color: #111827; /* text-gray-900 */
+  border-radius: 0.5rem; /* rounded-lg */
+  background-image: linear-gradient(to bottom right, #9333ea, #3b82f6); /* purple→blue */
+}
+
+.gradient-btn:hover {
+  color: white;
+}
+
+.gradient-btn span {
+  padding: 0.625rem 1.25rem; /* px-5 py-2.5 */
+  border-radius: 0.375rem; /* rounded-md */
+  transition: all 85ms ease-in;
+  width: 100%;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity, 1));
+}
+
+.gradient-btn:hover span {
+  background-color: transparent;
+}
+
+.gradient-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.125rem; /* p-0.5 */
+  overflow: hidden;
+  font-size: 0.875rem; /* text-sm */
+  font-weight: 500; /* font-medium */
+  color: #111827; /* text-gray-900 */
+  border-radius: 0.5rem; /* rounded-lg */
+  background-image: linear-gradient(to bottom right, #10b981, #14b8a6); /* emerald → teal */
+}
+
+.gradient-btn-secondary:hover {
+  color: white;
+}
+
+.gradient-btn-secondary span {
+  padding: 0.625rem 1.25rem; /* px-5 py-2.5 */
+  border-radius: 0.375rem; /* rounded-md */
+  transition: all 85ms ease-in;
+  width: 100%;
+  background-color: rgb(17 24 39 / var(--tw-bg-opacity, 1));
+}
+
+.gradient-btn-secondary:hover span {
+  background-color: transparent;
 }

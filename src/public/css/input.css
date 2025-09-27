@@ -1,0 +1,30 @@
+@import 'tailwindcss';
+
+@layer base {
+  label {
+    @apply flex flex-col gap-1; /* gap: 4px ≈ gap-1 (0.25rem) */
+  }
+
+  form {
+    display: contents; /* Tailwind has no utility for this */
+  }
+
+  body {
+    @apply bg-black;
+  }
+
+  p,
+  span,
+  div,
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-white;
+  }
+
+  input {
+    @apply bg-gray-800;
+  }
+
+}

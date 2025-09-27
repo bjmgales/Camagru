@@ -1,4 +1,4 @@
-import { AUTHENTICATED } from "../const/const.js";
+import { useSplashScreen } from '../global/splashScreen.js';
 
 export async function apiRequest(endpoint, options = {}) {
   const response = await fetch(`/api/${endpoint}`, {
@@ -16,25 +16,20 @@ export async function apiRequest(endpoint, options = {}) {
   return data;
 }
 
-export const checkUserAndRedirect = async () => {
+export const checkUser = async () => {
+  useSplashScreen(2000);
   try {
     const data = await apiRequest('me');
-    if (data[AUTHENTICATED] == true) {
-      window.location.href = '/home';
-    }
+    if (window.location.href == 'http://localhost:8080/') window.location.href = '/home';
+    console.log(window.location.href);
+    return true;
   } catch (err) {
-    window.location.href = '/login?not-connected';
+    window.location.href = '/login?not-connected=true';
+    return false;
   }
 };
 
 export const fetchMe = async () => {
-  try {
-    const data = await apiRequest('me');
-    if (data['authenticated'] == true) {
-      return data;
-    }
-  } catch (err) {
-    console.log(err)
-    // window.location.href = '/'
-  }
+  const data = await apiRequest('me');
+  return data;
 };

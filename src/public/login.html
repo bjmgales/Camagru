@@ -1,51 +1,57 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/output.css" />
     <link rel="stylesheet" href="/css/app.css" />
+
     <title>Login</title>
   </head>
   <body>
-    <div style="display: flex; justify-content: center; flex-direction: column; align-items: center; gap: 50px">
-      <h1>Welcome to Camagru!</h1>
-      <h2 id="welcome-title">Please Login or Sign Up to access!</h2>
-      <div style="max-width: fit-content; display: flex; flex-direction: row; gap: 120px">
-        <div style="max-width: fit-content; display: flex; flex-direction: column; gap: 8px">
+    <div class="flex justify-center flex-col items-center gap-12">
+      <div class="flex flex-col items-center">
+        <img class="w-32 mt-3" alt="Camagru" src="img/logo.png" />
+      </div>
+      <div class="max-w-fit flex gap-10 lg:gap-32 container flex-col lg:flex-row">
+        <div class="max-w-fit flex flex-col gap-2 bg-gray-900 p-12 border-2 border-gray-500 rounded-2xl">
           <form id="loginForm">
-            <h2>Login</h2>
-            <label style="display: flex; flex-direction: column"
-              >email
-              <input class="mail" type="email" required />
+            <h2 class="relative -top-7 -left-7">Login</h2>
+            <label
+              >email or username
+              <input class="userId" type="text" required />
             </label>
-            <label style="display: flex; flex-direction: column">
+            <label>
               password
               <input class="password" type="password" required />
             </label>
-            <span class="message" style="font-size: small; max-width: 140px"></span>
-            <button class="submit">submit</button>
+            <span class="message text-sm max-w-36"></span>
+            <button class="submit mt-auto gradient-btn"><span>submit</span></button>
           </form>
         </div>
-        <div class='signupDiv'style="max-width: fit-content; display: flex; flex-direction: column; gap: 8px">
-          <h2>Sign up</h2>
-          <form id="signupForm">
-            <label>
-              email
-              <input id="mail" class="mail" type="email" required />
-            </label>
-            <label
-              >username
-              <input class="username" type="text" required />
-            </label>
-            <label
-              >password
-              <input class="password" type="password" required />
-            </label>
-            <label
-              >confirm password
-              <input class="confirmPassword" type="password" required />
-            </label>
-            <span class="message" style="font-size: small; max-width: 140px"></span>
-            <button class="submit">submit</button>
-          </form>
+        <div class="max-w-fit flex gap-10 lg:gap-32 container flex-col lg:flex-row">
+          <div class="max-w-fit flex flex-col gap-2 bg-gray-900 p-12 border-2 border-gray-500 rounded-2xl">
+            <h2 class="relative -top-7 -left-7">Sign up</h2>
+            <form id="signupForm">
+              <label>
+                email
+                <input id="mail" class="mail" type="email" required />
+              </label>
+              <label
+                >username
+                <input class="username" type="text" required />
+              </label>
+              <label
+                >password
+                <input class="password" type="password" required />
+              </label>
+              <label
+                >confirm password
+                <input class="confirmPassword" type="password" required />
+              </label>
+              <span class="message text-sm max-w-36"></span>
+              <button class="submit mt-2 gradient-btn"><span>submit</span></button>
+            </form>
+          </div>
         </div>
       </div>
     </div>

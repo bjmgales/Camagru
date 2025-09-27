@@ -1,5 +1,22 @@
 <!DOCTYPE html>
 <html>
-    <h1 id="welcome-user">dqwdqw</h1>
-  <script type="module" src="js/home.js"></script>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/output.css" />
+    <link rel="stylesheet" href="/css/app.css" />
+    <script type="module" src="js/init.js"></script>
+
+    <title>Camagru | Home</title>
+  </head>
+  <body style="display: none;">
+
+    <div style="display: flex; align-items: center">
+      <h1 id="welcome-user" class="text-center"></h1>
+    </div>
+    <button class="logoutButton gradient-btn-secondary absolute top-2.5 right-2.5 cursor-pointer">
+      <span>logout</span>
+    </button>
+    <script type="module" src="js/home.js"></script>
+    <script type="module" src="js/fetchService/logout.js"></script>
+</body>
 </html>

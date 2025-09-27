@@ -14,3 +14,11 @@ function success_response($payload)
     $result = json_encode($payload);
     echo $result;
 }
+
+function sanitize_user_inputs(array|string $input)
+{
+    if (is_array(($input))) {
+        return array_map(fn($elem) => htmlspecialchars($elem, ENT_QUOTES, 'UTF-8'), $input);
+    }
+    return htmlspecialchars($input, ENT_QUOTES, "UTF-8");
+}

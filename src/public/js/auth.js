@@ -1,23 +1,19 @@
 import { NOT_CONNECTED, SUCCESS } from './const/const.js';
 import { messages } from './const/message.js';
-import { apiRequest } from './fetchService/api.js';
+import { apiRequest, fetchMe } from './fetchService/api.js';
+import { useSplashScreen } from './global/splashScreen.js';
 import { fillInnerHtml } from './utils.js';
 
-const params = new URLSearchParams(window.location.search);
 
-if (params.has('verification-success')) {
-  document.querySelector('.signupDiv').display = 'none';
-  document.querySelector('#welcome-title').textContent = messages['VERIFICATION_SUCCESS'];
-} else if (params.has('verification-failure')) {
-  document.querySelector('#welcome-title').textContent = messages['VERIFICATION_FAILURE'];
-}
+  const params = new URLSearchParams(window.location.search);
+
 
 const login = async () => {
-  const { email, password, messageSpan } = loginCredentials;
+  const { userID, password, messageSpan } = loginCredentials;
   try {
     const data = await apiRequest('login', {
       method: 'POST',
-      body: JSON.stringify({ email: email.value, password: password.value }),
+      body: JSON.stringify({ id: userID.value, password: password.value }),
     });
     if (data[SUCCESS]) window.location.href = '/home';
   } catch (err) {
@@ -40,7 +36,7 @@ const signUp = async () => {
       method: 'POST',
       body: JSON.stringify({ email: email.value, username: username.value, password: password.value }),
     });
-    fillInnerHtml(messageSpan, messages[data['message']], 'green');
+    fillInnerHtml(messageSpan, messages[data['message']] + ' ' + email.value, 'green');
   } catch (err) {
     if (messages[err.details?.['error']]) {
       fillInnerHtml(messageSpan, messages[err.details['error']], 'red');
@@ -50,7 +46,7 @@ const signUp = async () => {
 };
 
 const loginCredentials = {
-  email: document.querySelector('#loginForm .mail'),
+  userID: document.querySelector('#loginForm .userId'),
   password: document.querySelector('#loginForm .password'),
   submit: document.querySelector('#loginForm'),
   messageSpan: document.querySelector('#loginForm .message'),
@@ -75,9 +71,10 @@ signupCredentials.submit?.addEventListener('submit', (e) => {
 });
 
 const query = Object.fromEntries(params.entries());
-if (query && query[NOT_CONNECTED] == true) {
-  document.querySelector('#welcome-title').innerHTML =
-    "We know you're eager to visit this dope website, but please signup first petit malin!";
+try {
+  useSplashScreen();
+  if (query?.[NOT_CONNECTED] == 'true') await fetchMe();
+  window.location.href = '/home';
+} catch {
+  console.log(query)
 }
-
-console.log('gigaProut');
