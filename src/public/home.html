@@ -8,15 +8,28 @@
 
     <title>Camagru | Home</title>
   </head>
-  <body style="display: none;">
-
-    <div style="display: flex; align-items: center">
-      <h1 id="welcome-user" class="text-center"></h1>
+  <body style="display: none">
+    <div class="flex flex-row justify-between items-center sticky" style="background-color: #1b2132">
+      <img src="./img/logo.png" class="relative w-20 left-2 hidden md:block" />
+      <nav class="flex gap-5 md:gap-10 mr-10 md:mr-0">
+        <button class="ul-btn cameraBtn selected cursor-pointer">
+          <img src="./img/cam.svg" class="w-[10px] md:w-auto"/>
+          <hr />
+        </button>
+        <button class="ul-btn galleryBtn cursor-pointer">
+          <img src="./img/gallery.svg" class="w-[10px] md:w-auto"/>
+          <hr />
+        </button>
+      </nav>
+      <div class="relative right-2.5 min-w-8 items-center flex flex-col md:flex md:flex-row md:gap-4">
+        <span id="username-span" class="text-xs"></span>
+        <button class="logoutButton gradient-btn-theme">
+          <img src="./img/logout.svg"/>
+        </button>
+      </div>
     </div>
-    <button class="logoutButton gradient-btn-secondary absolute top-2.5 right-2.5 cursor-pointer">
-      <span>logout</span>
-    </button>
+    <div id="webcamDiv">t</div>
     <script type="module" src="js/home.js"></script>
     <script type="module" src="js/fetchService/logout.js"></script>
-</body>
+  </body>
 </html>
