@@ -149,6 +149,22 @@ button {
   cursor: url('../img/pointer.png') 0 0, default;
 }
 
+.cursor-pointer {
+  cursor: url('../img/pointer.png') 0 0, default;
+}
+
 html {
   cursor: url('../img/default-cursor.png') 0 0, default;
+}
+
+.bordered {
+  padding: 3px;
+  background: linear-gradient(90deg, #00c6c3 0%, #00d67f 40%, #f7b733 100%);
+  border-radius: 12px;
+}
+
+.bordered > * {
+  background: #0d1119;
+  border-radius: 10px; /* border radius minus padding */
+  padding: 1rem;
 }

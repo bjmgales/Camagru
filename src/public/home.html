@@ -9,27 +9,68 @@
     <title>Camagru | Home</title>
   </head>
   <body style="display: none">
-    <div class="flex flex-row justify-between items-center sticky" style="background-color: #1b2132">
+    <div
+      class="flex flex-row justify-between items-center sticky top-0 z-10 h-30 md:h-auto"
+      style="background-color: #1b2132"
+    >
       <img src="./img/logo.png" class="relative w-20 left-2 hidden md:block" />
-      <nav class="flex gap-5 md:gap-10 mr-10 md:mr-0">
+      <nav class="absolute md:static left-1/2 -translate-x-1/2 md:translate-none flex gap-5 md:gap-10 mr-10 md:mr-0">
         <button class="ul-btn cameraBtn selected cursor-pointer">
-          <img src="./img/cam.svg" class="w-[10px] md:w-auto"/>
+          <img src="./img/cam.svg" class="w-[50px] md:w-auto" />
           <hr />
         </button>
         <button class="ul-btn galleryBtn cursor-pointer">
-          <img src="./img/gallery.svg" class="w-[10px] md:w-auto"/>
+          <img src="./img/gallery.svg" class="w-[50px] md:w-auto" />
           <hr />
         </button>
       </nav>
-      <div class="relative right-2.5 min-w-8 items-center flex flex-col md:flex md:flex-row md:gap-4">
+      <div class="relative right-2.5 min-w-8 items-center flex flex-col md:flex md:flex-row md:gap-4 ml-auto md:ml-0">
         <span id="username-span" class="text-xs"></span>
-        <button class="logoutButton gradient-btn-theme">
-          <img src="./img/logout.svg"/>
+        <button class="logoutButton gradient-btn-theme w-[50px] md:w-auto">
+          <img src="./img/logout.svg" />
         </button>
       </div>
     </div>
-    <div id="webcamDiv">t</div>
+    <div id="main-content" class="flex top-100 -translate-y-1/2 left-1/10 relative w-max gap-x-[20px]">
+      <div id="webcam-container" class="gap-y-[10px] flex-col items-center hidden bordered">
+        <div id="webcam-div" class="border-4">
+          <video id="video-element" autoplay="true"></video>
+        </div>
+        <button class="hover:opacity-80 active:opacity-100" id="take-snapshot">
+          <img src="./img/cam2.svg" class="w-[50px]" />
+        </button>
+        <div id="picture-decision" class="flex gap-x-[20px]">
+          <button id="keep-picture"><img src="./img/cross.svg" /></button>
+          <div class="h-[30px] border-l border-gray-300"></div>
+          <button id="delete-picture"><img src="./img/check.svg" /></button>
+        </div>
+      </div>
+      <div
+        id="upload-container"
+        class="gap-y-[10px] flex-col items-center hidden w-[500px] h-[400px] justify-center bordered"
+      >
+        <div class="flex flex-col justify-center items-center w-[495px] h-[400px] gap-y-[30px]">
+          <div class="flex flex-col items-center">
+            <img src="./img/NoWebcam.svg" />
+            <span class="text-sm text-center" style="color: gray"
+              >Webcam not detected.<br />
+              Please check hardware and permissions.</span
+            >
+          </div>
+          <hr class="w-[80%]" style="color: gray" />
+          <div id="upload-div" class="flex flex-col items-center w-[80%] cursor-pointer hover:opacity-65">
+            <img src="./img/upload.svg" />
+            <span class="text-sm text-center" style="color: gray">Upload image</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-col gap-y-[10px]">
+        <h2 class="">Overlays</h2>
+        <div id="overlay-gallery"></div>
+      </div>
+    </div>
     <script type="module" src="js/home.js"></script>
     <script type="module" src="js/fetchService/logout.js"></script>
+    <input type="file" id="file-input" accept="image/*" class="hidden" multiple/>
   </body>
 </html>
